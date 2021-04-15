@@ -1,0 +1,432 @@
+
+    <html>
+    <head>
+        <!--load jQuery, bootstrap CSS, firebase-->
+
+        <!--jQuery-->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+        <!--bootstrap-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-database.js"></script>
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+    apiKey: "AIzaSyCzeTOhtBRMYyT6EFdkoS9VlejGjBGuNA8",
+    authDomain: "venturefortuna-b8204.firebaseapp.com",
+    databaseURL: "https://venturefortuna-b8204-default-rtdb.firebaseio.com",
+    projectId: "venturefortuna-b8204",
+    storageBucket: "venturefortuna-b8204.appspot.com",
+    messagingSenderId: "470117584867",
+    appId: "1:470117584867:web:4f5ce2ace2b7f827c11ad6",
+    measurementId: "G-R2P96YB5E1"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  
+
+</script>
+</head>
+<body style="background-color:#484848;">
+        <!-- Navigation Bar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+              <a class="navbar-brand" href="#">Venture Fortuna</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="mainpage.html">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="myprofile.html">My Profile</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="stats.html">Stats</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="education.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Learn!
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Intro</a>
+                      <a class="dropdown-item" href="#">Actionable Steps</a>
+                      <a class="dropdown-item" href="#">Types of Investments</a>
+                      <a class="dropdown-item" href="#">Different Investment Strategies</a>
+                      <a class="dropdown-item" href="#">Investment Advisory</a>
+                      <a class="dropdown-item" href="#">Actionable Steps</a>
+                      <a class="dropdown-item" href="#">Final Words</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+              </div>
+            </nav>
+    
+
+<!-- edit "Edit Profile" modal-->
+              <!-- Button trigger modal -->
+                
+                <div class="modal fade" id= editProfile tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Edit this profile:</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!--add user profile-->
+            <div class="container" id="edit-add-user">
+                <div class="well">
+            
+            <form>
+                <div class="form-group">
+                  <label for="edit-inputUsersName">User's Name</label>
+                  <input type="text" class="form-control" id="edit-inputUsersName" placeholder="Users Name">
+                </div>
+                <div class="form-group">
+                    <label for="edit-age-cohort">User's Age Range</label>
+                    <select class="form-control" id="edit-age-cohort">
+                        <option value="18-24">18-24</option>
+                        <option value="24-36">24-36</option>
+                        <option value="36-62">36-62</option>
+                        <option value="62+">62+</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-inputMoneyInv">Current Money Invested</label>
+                    <input type="number" class="form-control" id="edit-inputMoneyInv" placeholder="Dollars">
+                  </div>
+                <div class="form-group">
+                    <label for="edit-InvType">Type of Investment</label>
+                    <select class="form-control" id="edit-InvType">
+                        <option value="Stocks">Stocks</option>
+                        <option value="Bonds">Bonds</option>
+                        <option value="Mutual Funds">Mutual Funds</option>
+                        <option value="Real Estate">Real Estate</option>
+                        <option value="Savings">Savings</option>
+                        <option value="Forex">Forex</option>
+                        <option value="Exhange Traded Funds">Exchange Traded Funds (EFT's)</option>
+                        <option value="Alternative">Alternative</option>
+                        <option value="None">None</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-currentValue">Current Asset Value</label>
+                    <input type="number" class="form-control" id="edit-currentValue" placeholder="Dollars">
+                  </div>
+                
+                <button id="edit-newUserProfile-button" type="button" class="btn btn-primary">Edit new user</button>
+                
+              </form>
+            </div>
+            </div>
+        </div>
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal -->
+
+
+
+
+
+
+
+
+
+            <!--login form-->
+            <div class="container" id="login-form">
+                <div class="well">
+
+                <h3>Please sign in or create a new account</h3>
+            
+            <form>
+                <div class="form-group">
+                  <label for="inputEmail">Email address</label>
+                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword">Password</label>
+                  <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                </div>
+                
+                <button id="sign-in-button" type="button" class="btn btn-primary">Sign in</button>
+                <button id="create-newuser-button" type="button" class="btn btn-success">Create new account</button>
+                <button id="google-login-button" type="button" class="btn btn-primary">Sign in with Google</button>
+              </form>
+            </div>
+
+            </div>
+            <hr>
+            <div class="container" id="logout-form">
+                <button id="logout-button" type="button" class="btn btn-primary btn-block">Log out</button>
+            </div>
+        
+            </hr>
+
+            <!--show user profiles here-->
+
+            <div class="container" id="show-profiles">
+                <h1>Show User Profiles here.</h1>
+            </div>
+
+
+
+
+
+
+
+            <!--add user profile-->
+            <div class="container" id="add-user">
+                <div class="well">
+                
+                <h3>Fill out your profile information</h3>
+            
+            <form>
+                <div class="form-group">
+                  <label for="inputUsersName">User's Name</label>
+                  <input type="text" class="form-control" id="inputUsersName" placeholder="Users Name">
+                </div>
+                <div class="form-group">
+                    <label for="age-cohort">User's Age Range</label>
+                    <select class="form-control" id="age-cohort">
+                        <option value="18-24">18-24</option>
+                        <option value="24-36">24-36</option>
+                        <option value="36-62">36-62</option>
+                        <option value="62+">62+</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputMoneyInv">Current Money Invested</label>
+                    <input type="number" class="form-control" id="inputMoneyInv" placeholder="Dollars">
+                  </div>
+                <div class="form-group">
+                    <label for="InvType">Type of Investment</label>
+                    <select class="form-control" id="InvType">
+                        <option value="Stocks">Stocks</option>
+                        <option value="Bonds">Bonds</option>
+                        <option value="Mutual Funds">Mutual Funds</option>
+                        <option value="Real Estate">Real Estate</option>
+                        <option value="Savings">Savings</option>
+                        <option value="Forex">Forex</option>
+                        <option value="Exhange Traded Funds">Exchange Traded Funds (EFT's)</option>
+                        <option value="Alternative">Alternative</option>
+                        <option value="None">None</option>
+                      </select>
+                </div>
+                <div class="form-group">
+                    <label for="currentValue">Current Asset Value</label>
+                    <input type="number" class="form-control" id="currentValue" placeholder="Dollars">
+                  </div>
+                
+                <button id="create-newUserProfile-button" type="button" class="btn btn-primary">Create new user</button>
+                
+              </form>
+            </div>
+        
+            <!--scripts-->
+            <script>
+                //var currentUser = {};
+                //button listeners
+                $("#create-newuser-button").click(function(){
+                    var email = $("#inputEmail").val();
+                    var password = $("#inputPassword").val();
+                    console.log("New user =" + email+ " " + password);
+                    CreateNewUser(email, password);
+                });
+                
+                $("#sign-in-button").click(function(){
+                    var email = $("#inputEmail").val();
+                    var password = $("#inputPassword").val();
+                    console.log("Existing user =" + email+ " " + password);
+                    SignIn(email, password);
+                });
+                
+                $("#logout-button").click(function(){
+                    firebase.auth().signOut();
+                    console.log("Logged Out");
+                    //hide login form
+                  $("#login-form").show();
+
+                    //show the create profile form
+                  $("#add-user").hide();
+                });
+
+                $("#create-newUserProfile-button").click(function(){
+                    var profile = {
+                        id: $("#inputUsersName").val() + Date.now(),
+                        owner: currentUser.uid,
+                        name: $("#inputUsersName").val(),
+                        age: $("#age-cohort :selected").val(),
+                        moneyInvested: $("#inputMoneyInv").val(),
+                        investmentType: $("#InvType :selected").val(),
+                        currentAssetValue: $("#currentValue").val(),
+
+                    }  
+                    addProfileToDatabase(profile);                 
+                });
+
+                $(document).on("click", ".delete-profile", function(){
+                    console.log("clicked");
+                    var profileID = $(this).attr('id');
+                    console.log(profileID);
+                    firebase.database().ref("profiles/"+ profileID).remove();
+                    firebase.database().ref("users/" + currentUser.uid+ "/profiles/"+ profileID).remove();
+                });
+
+                $(document).on("click", ".edit-profile-button", function(){
+                    var profilename = $(this).parent().find(".profile-data-name").text();
+                    $("#edit-inputUsersName").val(profilename);
+
+                    var profileage = $(this).parent().find(".profile-data-age").text();
+                    $("#edit-age-cohort").val(profileage);
+
+                    var monInvested = $(this).parent().find(".profile-data-moneyInvested").text();
+                    $("#edit-inputMoneyInv").val(monInvested);
+
+                    var investmenType = $(this).parent().find(".profile-data-investmentType").text();
+                    $("#edit-InvType").val(investmenType);
+
+                    var CurrentAssetValue = $(this).parent().find(".profile-data-currentAssetValue").text();
+                    $("#edit-currentValue").val(CurrentAssetValue);
+
+
+
+
+
+
+                });
+
+                function addProfileToDatabase(p){
+                    var database = firebase.database();
+                    firebase.database().ref("profiles/" + p.id).set(p);
+                    firebase.database().ref("users/" + currentUser.uid+"/profiles/"+p.id).set(p);
+                    //firebase.database().ref("users/" + currentUser.uid+"/profiles/"+p.id).set(p);
+                }
+                    
+
+            function CreateNewUser(email, password){
+                firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error){
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log(errorMessage);
+                    alert(errorMessage);
+                });
+            }
+            
+                    //  function signUpWithEmailPassword() {
+            //var email = "test@example.com";
+            //var password = "hunter2";
+            // [START auth_signup_password]
+            /*firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                // Signed in 
+                var user = userCredential.user;
+                // ...
+                })
+                .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorMessage);
+                // ..
+                });*/
+            // [END auth_signup_password]
+            //}
+            //var database = firebase.database();
+
+            function writeUserData(user) {
+                firebase.database().ref('users/' + user.uid).set({
+                    email: user.email
+                });
+            }
+
+            function SignIn(email, password){
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorMessage);
+                alert(errorMessage);
+            });
+            
+            }
+
+            var profileReference = firebase.database().ref().child("profiles");
+                profileReference.on("value",function(snapshot){
+                    $("#show-profiles").empty();
+                    var profileHTMLitem = "<h3>Here are all of the profiles I have in my database.</h3>";
+                    
+                    snapshot.forEach(function(childsnapshot){
+                        var person = childsnapshot.val();
+                        profileHTMLitem += "<div class'profileHTMLitem'><hr><ul>";
+                        profileHTMLitem += "<li>Name:<span class='profile-data-name'>" + person.name + "</span></li>";
+                        profileHTMLitem += "<li>Age:<span class='profile-data-age'>" + person.age + "</span></li>";
+                        profileHTMLitem += "<li>moneyInvested:<span class='profile-data-moneyInvested'>" + person.moneyInvested + "</span></li>";
+                        profileHTMLitem += "<li>InvestmentType:<span class='profile-data-investmentType'>" + person.investmentType + "</span></li>";
+                        profileHTMLitem += "<li>currentAssetValue:<span class='profile-data-currentAssetValue'>" + person.currentAssetValue + "</span></li>";
+                        profileHTMLitem += "</ul>";
+                        /*item.key = childsnapshot.key;
+                        console.log(item)
+                        console.log(item.key);*/
+                        profileHTMLitem += "<button type='button' class='btn btn-danger delete-profile' id='" + person.id + "'>Delete Me</button>";
+                        profileHTMLitem += "<button type = 'button' class = 'btn btn-success edit-profile-button' data-profileid=" + person.id + "data-toggle='modal' data-target='#editProfile'>Edit Me</button>";
+                        profileHTMLitem += "</div>";
+                    });
+                    $("#show-profiles").html(profileHTMLitem);
+            });
+            
+            
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                var email = user.email;
+                currentUser = user;
+                writeUserData(user);
+                console.log(currentUser.email +" has logged in");
+                // ...
+                //hide login form
+                $("#login-form").hide();
+
+                //show the create profile form
+                $("#add-user").show();
+            } else {
+                // User is signed out
+                // ...
+            }
+            });
+            
+
+
+            </script>
+            
+            </body>
+            </html>
